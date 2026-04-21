@@ -1,0 +1,385 @@
+@import url("https://fonts.googleapis.com/css2?family=Cantarell:wght@400;700&display=swap");
+
+:root {
+	--kali-bg: #0c1116;
+	--kali-bg-2: #111821;
+	--kali-panel: #0a0e13;
+	--kali-panel-border: #1c2733;
+	--kali-accent: #367bf0;
+	--kali-accent-2: #2a6fd6;
+	--kali-text: #e6ecf2;
+	--kali-text-dim: #9aa7b4;
+	--kali-window: #1b232d;
+	--kali-window-border: #2a3543;
+	--kali-titlebar: #14202c;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html,
+body {
+	height: 100%;
+}
+
+body {
+	font-family: "Cantarell", "Segoe UI", Arial, sans-serif;
+	margin: 0;
+	color: var(--kali-text);
+	background:
+		radial-gradient(
+			ellipse at 30% 20%,
+			rgba(54, 123, 240, 0.18),
+			transparent 60%
+		),
+		radial-gradient(
+			ellipse at 80% 80%,
+			rgba(54, 123, 240, 0.08),
+			transparent 55%
+		),
+		linear-gradient(160deg, #0a0f15 0%, #0c1219 50%, #0a1018 100%);
+	background-attachment: fixed;
+	overflow: hidden;
+}
+
+/* ---------- Top panel ---------- */
+#top-panel {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 28px;
+	background: linear-gradient(180deg, #0d141c 0%, #080c11 100%);
+	border-bottom: 1px solid var(--kali-panel-border);
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 10px;
+	font-size: 13px;
+	color: var(--kali-text);
+	z-index: 50;
+	user-select: none;
+}
+
+.panel-left,
+.panel-right,
+.panel-center {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.panel-menu {
+	color: var(--kali-accent);
+	font-weight: 700;
+	cursor: default;
+}
+
+.panel-item {
+	color: var(--kali-text-dim);
+	cursor: default;
+}
+
+.panel-sep {
+	width: 1px;
+	height: 14px;
+	background: var(--kali-panel-border);
+}
+
+#panel-title {
+	color: var(--kali-text-dim);
+	font-size: 12px;
+}
+
+#panel-clock {
+	font-variant-numeric: tabular-nums;
+	color: var(--kali-text);
+}
+
+/* ---------- Desktop ---------- */
+#desktop {
+	position: fixed;
+	top: 28px;
+	bottom: 56px;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+}
+
+/* ---------- XFCE-styled window ---------- */
+.xfce-window {
+	width: 560px;
+	max-width: 100%;
+	background: var(--kali-window);
+	border: 1px solid var(--kali-window-border);
+	border-radius: 6px;
+	box-shadow:
+		0 12px 40px rgba(0, 0, 0, 0.6),
+		0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+	overflow: hidden;
+}
+
+.xfce-titlebar {
+	background: linear-gradient(180deg, #1a2735 0%, #111c27 100%);
+	border-bottom: 1px solid var(--kali-window-border);
+	padding: 8px 14px;
+	font-size: 13px;
+	color: var(--kali-text);
+	letter-spacing: 0.3px;
+}
+
+.xfce-title {
+	font-weight: 700;
+}
+
+.xfce-content {
+	padding: 28px 26px 22px;
+}
+
+.logo-wrapper {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 14px;
+}
+
+.logo {
+	height: 56px;
+	width: auto;
+}
+
+.logo-wrapper h1 {
+	font-size: 26px;
+	margin: 0;
+	color: var(--kali-text);
+	font-weight: 700;
+	letter-spacing: 0.5px;
+}
+
+.desc {
+	color: var(--kali-text-dim);
+	font-size: 13.5px;
+	line-height: 1.5;
+	margin: 0 0 18px;
+}
+
+#sj-form {
+	display: flex;
+}
+
+#sj-address {
+	flex: 1;
+	background: #0d141c;
+	border: 1px solid var(--kali-window-border);
+	color: var(--kali-text);
+	height: 40px;
+	padding: 0 14px;
+	border-radius: 4px;
+	outline: none;
+	font-family: inherit;
+	font-size: 14px;
+	transition:
+		border-color 0.15s,
+		box-shadow 0.15s;
+}
+
+#sj-address::placeholder {
+	color: #5b6876;
+}
+
+#sj-address:focus {
+	border-color: var(--kali-accent);
+	box-shadow: 0 0 0 2px rgba(54, 123, 240, 0.25);
+}
+
+#sj-error {
+	color: #ff7676;
+	margin: 12px 0 0;
+	font-size: 13px;
+	white-space: pre-wrap;
+}
+
+#sj-error-code {
+	font-size: 11.5px;
+	color: var(--kali-text-dim);
+	font-family: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
+	margin: 6px 0 0;
+	white-space: pre-wrap;
+}
+
+/* ---------- Embedded frame ---------- */
+#sj-frame {
+	border: none;
+	position: fixed;
+	top: 28px;
+	left: 0;
+	width: 100vw;
+	height: calc(100vh - 28px - 56px);
+	background-color: #0c1116;
+	z-index: 5;
+}
+
+/* ---------- Bottom dock ---------- */
+#bottom-dock {
+	position: fixed;
+	bottom: 10px;
+	left: 50%;
+	transform: translateX(-50%);
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 14px;
+	background: rgba(10, 14, 19, 0.85);
+	border: 1px solid var(--kali-panel-border);
+	border-radius: 12px;
+	backdrop-filter: blur(10px);
+	z-index: 50;
+}
+
+.dock-item {
+	width: 40px;
+	height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--kali-text);
+	background: linear-gradient(180deg, #16202c, #0f1820);
+	border: 1px solid var(--kali-window-border);
+	border-radius: 8px;
+	cursor: pointer;
+	transition:
+		transform 0.12s ease,
+		border-color 0.15s,
+		color 0.15s;
+}
+
+.dock-item:hover {
+	transform: translateY(-3px);
+	color: var(--kali-accent);
+	border-color: var(--kali-accent);
+}
+
+/* ---------- Lock / setup overlay ---------- */
+#lock-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 1000;
+	background:
+		radial-gradient(
+			ellipse at center,
+			rgba(54, 123, 240, 0.22),
+			transparent 60%
+		),
+		linear-gradient(180deg, #05080c 0%, #0a1118 100%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#lock-overlay.hidden {
+	display: none;
+}
+
+#lock-card {
+	width: 360px;
+	padding: 32px 28px 26px;
+	background: rgba(20, 28, 38, 0.85);
+	border: 1px solid var(--kali-window-border);
+	border-radius: 10px;
+	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+	text-align: center;
+	backdrop-filter: blur(14px);
+}
+
+#lock-avatar {
+	width: 96px;
+	height: 96px;
+	border-radius: 50%;
+	background: linear-gradient(180deg, #1a2735, #0f1820);
+	border: 1px solid var(--kali-window-border);
+	color: var(--kali-accent);
+	margin: 0 auto 14px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#lock-title {
+	margin: 0 0 4px;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+#lock-sub {
+	margin: 0 0 20px;
+	color: var(--kali-text-dim);
+	font-size: 13px;
+}
+
+#lock-form {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+#lock-form input {
+	height: 40px;
+	padding: 0 14px;
+	background: #0d141c;
+	border: 1px solid var(--kali-window-border);
+	border-radius: 4px;
+	color: var(--kali-text);
+	font-family: inherit;
+	font-size: 14px;
+	outline: none;
+	transition:
+		border-color 0.15s,
+		box-shadow 0.15s;
+}
+
+#lock-form input::placeholder {
+	color: #5b6876;
+}
+
+#lock-form input:focus {
+	border-color: var(--kali-accent);
+	box-shadow: 0 0 0 2px rgba(54, 123, 240, 0.25);
+}
+
+#lock-form input.hidden {
+	display: none;
+}
+
+#lock-submit {
+	margin-top: 4px;
+	height: 40px;
+	background: linear-gradient(
+		180deg,
+		var(--kali-accent) 0%,
+		var(--kali-accent-2) 100%
+	);
+	color: white;
+	border: 1px solid var(--kali-accent-2);
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: 14px;
+	font-weight: 700;
+	cursor: pointer;
+	letter-spacing: 0.3px;
+	transition: filter 0.15s;
+}
+
+#lock-submit:hover {
+	filter: brightness(1.1);
+}
+
+#lock-error {
+	margin: 6px 0 0;
+	min-height: 16px;
+	color: #ff7676;
+	font-size: 12.5px;
+}
