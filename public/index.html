@@ -20,77 +20,58 @@
 	</head>
 
 	<body>
-		<!-- Top XFCE-style panel -->
-		<div id="top-panel">
-			<div class="panel-left">
-				<span class="panel-menu">Applications</span>
-				<span class="panel-sep"></span>
-				<span class="panel-item">Places</span>
+		<header id="chrome">
+			<div id="tabbar">
+				<div id="tabs"></div>
+				<button id="new-tab" type="button" title="New tab" aria-label="New tab">
+					<svg viewBox="0 0 24 24" width="16" height="16">
+						<path
+							fill="currentColor"
+							d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2Z"
+						/>
+					</svg>
+				</button>
 			</div>
-			<div class="panel-center">
-				<span id="panel-title">Workspace 1</span>
+			<div id="addressbar">
+				<form id="sj-form">
+					<input
+						id="sj-search-engine"
+						value="https://www.google.com/search?q=%s"
+						type="hidden"
+					/>
+					<input
+						id="sj-address"
+						type="text"
+						placeholder="Search or enter address"
+						autocomplete="off"
+					/>
+				</form>
 			</div>
-			<div class="panel-right">
-				<span id="panel-clock"></span>
-			</div>
-		</div>
+		</header>
 
-		<!-- Desktop wallpaper area -->
-		<main id="desktop">
-			<div id="search-window" class="xfce-window">
-				<div class="xfce-titlebar">
-					<span class="xfce-title">Search</span>
-				</div>
-				<div class="xfce-content">
-					<div class="logo-wrapper">
-						<img class="logo" src="sj.png" alt="Scramjet" />
-						<h1>Scramjet</h1>
-					</div>
-					<p class="desc">
-						Scramjet is an experimental interception based web proxy designed
-						to evade internet censorship, bypass arbitrary web browser
-						restrictions and innovate web proxy technologies.
-					</p>
-					<form id="sj-form">
-						<input
-							id="sj-search-engine"
-							value="https://www.google.com/search?q=%s"
-							type="hidden"
-						/>
-						<input
-							id="sj-address"
-							type="text"
-							placeholder="Search the web freely"
-							autocomplete="off"
-						/>
-					</form>
+		<main id="viewport">
+			<div id="frames"></div>
+			<div id="home-screen">
+				<div class="home-card">
+					<img class="logo" src="sj.png" alt="Scramjet" />
+					<h1>Scramjet</h1>
+					<p>Search or enter an address above to begin.</p>
 					<p id="sj-error"></p>
 					<pre id="sj-error-code"></pre>
 				</div>
 			</div>
 		</main>
 
-		<!-- Bottom XFCE-style dock -->
-		<div id="bottom-dock">
-			<div class="dock-item" title="Search">
-				<svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5Zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14Z"/></svg>
-			</div>
-			<div class="dock-item" title="Web">
-				<svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2Zm7.93 9h-3.04a15.4 15.4 0 0 0-1.2-5.21A8 8 0 0 1 19.93 11ZM12 4a13.6 13.6 0 0 1 1.86 7H10.14A13.6 13.6 0 0 1 12 4ZM4.07 13h3.04a15.4 15.4 0 0 0 1.2 5.21A8 8 0 0 1 4.07 13Zm0-2a8 8 0 0 1 4.24-5.21A15.4 15.4 0 0 0 7.11 11Zm7.93 9a13.6 13.6 0 0 1-1.86-7h3.72A13.6 13.6 0 0 1 12 20Zm3.69-.79a15.4 15.4 0 0 0 1.2-5.21h3.04a8 8 0 0 1-4.24 5.21Z"/></svg>
-			</div>
-			<div class="dock-item" title="Files">
-				<svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M10 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-8Z"/></svg>
-			</div>
-			<div class="dock-item" id="dock-lock" title="Lock">
-				<svg viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3Z"/></svg>
-			</div>
-		</div>
-
 		<!-- Lock / setup overlay -->
 		<div id="lock-overlay">
 			<div id="lock-card">
 				<div id="lock-avatar">
-					<svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5Z"/></svg>
+					<svg viewBox="0 0 24 24" width="64" height="64">
+						<path
+							fill="currentColor"
+							d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5Z"
+						/>
+					</svg>
 				</div>
 				<h2 id="lock-title">Enter password</h2>
 				<p id="lock-sub">Welcome back</p>
@@ -112,5 +93,14 @@
 				</form>
 			</div>
 		</div>
+
+		<button id="lock-button" title="Lock" aria-label="Lock">
+			<svg viewBox="0 0 24 24" width="16" height="16">
+				<path
+					fill="currentColor"
+					d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3Z"
+				/>
+			</svg>
+		</button>
 	</body>
 </html>

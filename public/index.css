@@ -3,15 +3,17 @@
 :root {
 	--kali-bg: #0c1116;
 	--kali-bg-2: #111821;
-	--kali-panel: #0a0e13;
-	--kali-panel-border: #1c2733;
+	--kali-chrome: #0d141c;
+	--kali-chrome-2: #0a0f15;
+	--kali-border: #1c2733;
+	--kali-border-2: #2a3543;
 	--kali-accent: #367bf0;
 	--kali-accent-2: #2a6fd6;
 	--kali-text: #e6ecf2;
 	--kali-text-dim: #9aa7b4;
-	--kali-window: #1b232d;
-	--kali-window-border: #2a3543;
-	--kali-titlebar: #14202c;
+	--kali-input: #0d141c;
+	--kali-tab: #131c26;
+	--kali-tab-active: #1b2531;
 }
 
 * {
@@ -27,144 +29,134 @@ body {
 	font-family: "Cantarell", "Segoe UI", Arial, sans-serif;
 	margin: 0;
 	color: var(--kali-text);
-	background:
-		radial-gradient(
-			ellipse at 30% 20%,
-			rgba(54, 123, 240, 0.18),
-			transparent 60%
-		),
-		radial-gradient(
-			ellipse at 80% 80%,
-			rgba(54, 123, 240, 0.08),
-			transparent 55%
-		),
-		linear-gradient(160deg, #0a0f15 0%, #0c1219 50%, #0a1018 100%);
-	background-attachment: fixed;
+	background: var(--kali-bg);
 	overflow: hidden;
+	display: flex;
+	flex-direction: column;
 }
 
-/* ---------- Top panel ---------- */
-#top-panel {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	height: 28px;
-	background: linear-gradient(180deg, #0d141c 0%, #080c11 100%);
-	border-bottom: 1px solid var(--kali-panel-border);
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 0 10px;
-	font-size: 13px;
-	color: var(--kali-text);
-	z-index: 50;
+/* ---------- Top chrome (tabs + address bar) ---------- */
+#chrome {
+	flex: 0 0 auto;
+	background: linear-gradient(180deg, var(--kali-chrome) 0%, var(--kali-chrome-2) 100%);
+	border-bottom: 1px solid var(--kali-border);
 	user-select: none;
 }
 
-.panel-left,
-.panel-right,
-.panel-center {
+#tabbar {
+	display: flex;
+	align-items: flex-end;
+	gap: 2px;
+	padding: 6px 8px 0;
+	overflow-x: auto;
+	scrollbar-width: thin;
+	scrollbar-color: var(--kali-border-2) transparent;
+}
+
+#tabbar::-webkit-scrollbar {
+	height: 6px;
+}
+#tabbar::-webkit-scrollbar-thumb {
+	background: var(--kali-border-2);
+	border-radius: 3px;
+}
+
+#tabs {
+	display: flex;
+	align-items: flex-end;
+	gap: 2px;
+}
+
+.tab {
 	display: flex;
 	align-items: center;
-	gap: 14px;
-}
-
-.panel-menu {
-	color: var(--kali-accent);
-	font-weight: 700;
-	cursor: default;
-}
-
-.panel-item {
+	gap: 8px;
+	max-width: 220px;
+	min-width: 120px;
+	height: 32px;
+	padding: 0 10px;
+	background: var(--kali-tab);
+	border: 1px solid var(--kali-border);
+	border-bottom: none;
+	border-radius: 6px 6px 0 0;
 	color: var(--kali-text-dim);
-	cursor: default;
+	font-size: 13px;
+	cursor: pointer;
+	position: relative;
+	top: 1px;
+	transition: background 0.12s, color 0.12s;
 }
 
-.panel-sep {
-	width: 1px;
-	height: 14px;
-	background: var(--kali-panel-border);
-}
-
-#panel-title {
-	color: var(--kali-text-dim);
-	font-size: 12px;
-}
-
-#panel-clock {
-	font-variant-numeric: tabular-nums;
+.tab:hover {
+	background: #182231;
 	color: var(--kali-text);
 }
 
-/* ---------- Desktop ---------- */
-#desktop {
-	position: fixed;
-	top: 28px;
-	bottom: 56px;
+.tab.active {
+	background: var(--kali-tab-active);
+	color: var(--kali-text);
+	border-color: var(--kali-border-2);
+	border-bottom-color: var(--kali-tab-active);
+}
+
+.tab.active::after {
+	content: "";
+	position: absolute;
 	left: 0;
 	right: 0;
+	top: 0;
+	height: 2px;
+	background: var(--kali-accent);
+}
+
+.tab-title {
+	flex: 1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tab-close {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 24px;
+	width: 18px;
+	height: 18px;
+	border-radius: 4px;
+	color: var(--kali-text-dim);
+	flex-shrink: 0;
 }
 
-/* ---------- XFCE-styled window ---------- */
-.xfce-window {
-	width: 560px;
-	max-width: 100%;
-	background: var(--kali-window);
-	border: 1px solid var(--kali-window-border);
-	border-radius: 6px;
-	box-shadow:
-		0 12px 40px rgba(0, 0, 0, 0.6),
-		0 0 0 1px rgba(255, 255, 255, 0.02) inset;
-	overflow: hidden;
-}
-
-.xfce-titlebar {
-	background: linear-gradient(180deg, #1a2735 0%, #111c27 100%);
-	border-bottom: 1px solid var(--kali-window-border);
-	padding: 8px 14px;
-	font-size: 13px;
+.tab-close:hover {
+	background: rgba(255, 255, 255, 0.08);
 	color: var(--kali-text);
-	letter-spacing: 0.3px;
 }
 
-.xfce-title {
-	font-weight: 700;
-}
-
-.xfce-content {
-	padding: 28px 26px 22px;
-}
-
-.logo-wrapper {
+#new-tab {
+	width: 30px;
+	height: 30px;
+	margin-left: 4px;
 	display: flex;
 	align-items: center;
-	gap: 14px;
-	margin-bottom: 14px;
-}
-
-.logo {
-	height: 56px;
-	width: auto;
-}
-
-.logo-wrapper h1 {
-	font-size: 26px;
-	margin: 0;
-	color: var(--kali-text);
-	font-weight: 700;
-	letter-spacing: 0.5px;
-}
-
-.desc {
+	justify-content: center;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 6px;
 	color: var(--kali-text-dim);
-	font-size: 13.5px;
-	line-height: 1.5;
-	margin: 0 0 18px;
+	cursor: pointer;
+	transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+
+#new-tab:hover {
+	background: var(--kali-tab);
+	color: var(--kali-accent);
+	border-color: var(--kali-border);
+}
+
+#addressbar {
+	padding: 8px 10px;
+	border-top: 1px solid var(--kali-border);
+	background: var(--kali-chrome-2);
 }
 
 #sj-form {
@@ -173,18 +165,16 @@ body {
 
 #sj-address {
 	flex: 1;
-	background: #0d141c;
-	border: 1px solid var(--kali-window-border);
+	background: var(--kali-input);
+	border: 1px solid var(--kali-border-2);
 	color: var(--kali-text);
-	height: 40px;
+	height: 36px;
 	padding: 0 14px;
-	border-radius: 4px;
+	border-radius: 6px;
 	outline: none;
 	font-family: inherit;
-	font-size: 14px;
-	transition:
-		border-color 0.15s,
-		box-shadow 0.15s;
+	font-size: 13.5px;
+	transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 #sj-address::placeholder {
@@ -196,11 +186,78 @@ body {
 	box-shadow: 0 0 0 2px rgba(54, 123, 240, 0.25);
 }
 
+/* ---------- Main viewport ---------- */
+#viewport {
+	flex: 1 1 auto;
+	position: relative;
+	background: var(--kali-bg);
+	overflow: hidden;
+}
+
+#frames {
+	position: absolute;
+	inset: 0;
+}
+
+.sj-frame {
+	border: none;
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	background: var(--kali-bg);
+	display: none;
+}
+
+.sj-frame.active {
+	display: block;
+}
+
+#home-screen {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 24px;
+	background:
+		radial-gradient(ellipse at 30% 20%, rgba(54, 123, 240, 0.18), transparent 60%),
+		radial-gradient(ellipse at 80% 80%, rgba(54, 123, 240, 0.08), transparent 55%),
+		linear-gradient(160deg, #0a0f15 0%, #0c1219 50%, #0a1018 100%);
+}
+
+#home-screen.hidden {
+	display: none;
+}
+
+.home-card {
+	max-width: 480px;
+	text-align: center;
+	color: var(--kali-text);
+}
+
+.home-card .logo {
+	height: 84px;
+	margin-bottom: 14px;
+}
+
+.home-card h1 {
+	margin: 0 0 8px;
+	font-size: 28px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+}
+
+.home-card p {
+	color: var(--kali-text-dim);
+	font-size: 14px;
+	margin: 4px 0;
+}
+
 #sj-error {
-	color: #ff7676;
-	margin: 12px 0 0;
-	font-size: 13px;
+	color: #ff7676 !important;
 	white-space: pre-wrap;
+	margin-top: 14px;
 }
 
 #sj-error-code {
@@ -209,56 +266,30 @@ body {
 	font-family: ui-monospace, "Cascadia Code", "Source Code Pro", monospace;
 	margin: 6px 0 0;
 	white-space: pre-wrap;
+	text-align: left;
 }
 
-/* ---------- Embedded frame ---------- */
-#sj-frame {
-	border: none;
+/* ---------- Lock button ---------- */
+#lock-button {
 	position: fixed;
-	top: 28px;
-	left: 0;
-	width: 100vw;
-	height: calc(100vh - 28px - 56px);
-	background-color: #0c1116;
-	z-index: 5;
-}
-
-/* ---------- Bottom dock ---------- */
-#bottom-dock {
-	position: fixed;
-	bottom: 10px;
-	left: 50%;
-	transform: translateX(-50%);
-	display: flex;
-	align-items: center;
-	gap: 10px;
-	padding: 8px 14px;
-	background: rgba(10, 14, 19, 0.85);
-	border: 1px solid var(--kali-panel-border);
-	border-radius: 12px;
-	backdrop-filter: blur(10px);
-	z-index: 50;
-}
-
-.dock-item {
-	width: 40px;
-	height: 40px;
+	bottom: 14px;
+	right: 14px;
+	width: 36px;
+	height: 36px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	color: var(--kali-text);
-	background: linear-gradient(180deg, #16202c, #0f1820);
-	border: 1px solid var(--kali-window-border);
+	background: rgba(13, 20, 28, 0.85);
+	border: 1px solid var(--kali-border-2);
 	border-radius: 8px;
+	color: var(--kali-text-dim);
 	cursor: pointer;
-	transition:
-		transform 0.12s ease,
-		border-color 0.15s,
-		color 0.15s;
+	backdrop-filter: blur(8px);
+	z-index: 40;
+	transition: color 0.15s, border-color 0.15s;
 }
 
-.dock-item:hover {
-	transform: translateY(-3px);
+#lock-button:hover {
 	color: var(--kali-accent);
 	border-color: var(--kali-accent);
 }
@@ -269,11 +300,7 @@ body {
 	inset: 0;
 	z-index: 1000;
 	background:
-		radial-gradient(
-			ellipse at center,
-			rgba(54, 123, 240, 0.22),
-			transparent 60%
-		),
+		radial-gradient(ellipse at center, rgba(54, 123, 240, 0.22), transparent 60%),
 		linear-gradient(180deg, #05080c 0%, #0a1118 100%);
 	display: flex;
 	align-items: center;
@@ -288,7 +315,7 @@ body {
 	width: 360px;
 	padding: 32px 28px 26px;
 	background: rgba(20, 28, 38, 0.85);
-	border: 1px solid var(--kali-window-border);
+	border: 1px solid var(--kali-border-2);
 	border-radius: 10px;
 	box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
 	text-align: center;
@@ -300,7 +327,7 @@ body {
 	height: 96px;
 	border-radius: 50%;
 	background: linear-gradient(180deg, #1a2735, #0f1820);
-	border: 1px solid var(--kali-window-border);
+	border: 1px solid var(--kali-border-2);
 	color: var(--kali-accent);
 	margin: 0 auto 14px;
 	display: flex;
@@ -329,16 +356,14 @@ body {
 #lock-form input {
 	height: 40px;
 	padding: 0 14px;
-	background: #0d141c;
-	border: 1px solid var(--kali-window-border);
+	background: var(--kali-input);
+	border: 1px solid var(--kali-border-2);
 	border-radius: 4px;
 	color: var(--kali-text);
 	font-family: inherit;
 	font-size: 14px;
 	outline: none;
-	transition:
-		border-color 0.15s,
-		box-shadow 0.15s;
+	transition: border-color 0.15s, box-shadow 0.15s;
 }
 
 #lock-form input::placeholder {
@@ -357,11 +382,7 @@ body {
 #lock-submit {
 	margin-top: 4px;
 	height: 40px;
-	background: linear-gradient(
-		180deg,
-		var(--kali-accent) 0%,
-		var(--kali-accent-2) 100%
-	);
+	background: linear-gradient(180deg, var(--kali-accent) 0%, var(--kali-accent-2) 100%);
 	color: white;
 	border: 1px solid var(--kali-accent-2);
 	border-radius: 4px;
