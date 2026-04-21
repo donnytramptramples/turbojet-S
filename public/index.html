@@ -8,11 +8,11 @@
                 />
                 <title>Scramjet</title>
 
-                <link rel="shortcut icon" href="favicon.ico" />
-
+                <link rel="shortcut icon" content="favicon.webp" />
+        
                 <script src="/scram/scramjet.all.js"></script>
                 <script src="/baremux/index.js"></script>
-
+                
                 <link rel="stylesheet" href="index.css" />
                 <script src="register-sw.js" defer></script>
                 <script src="search.js" defer></script>
@@ -20,48 +20,8 @@
         </head>
 
         <body>
-                <header id="chrome">
-                        <div id="addressbar">
-                                <form id="sj-form">
-                                        <input
-                                                id="sj-search-engine"
-                                                value="https://duckduckgo.com/?q=%s"
-                                                type="hidden"
-                                        />
-                                        <input
-                                                id="sj-address"
-                                                type="text"
-                                                placeholder="Search or enter address"
-                                                autocomplete="off"
-                                        />
-                                </form>
-                        </div>
-                </header>
-
-                <main id="viewport">
-                        <div id="frames"></div>
-                        <div id="home-screen">
-                                <div class="home-card">
-                                        <img class="logo" src="sj.png" alt="Scramjet" />
-                                        <h1>Scramjet</h1>
-                                        <p>Search or enter an address above to begin.</p>
-                                        <p id="sj-error"></p>
-                                        <pre id="sj-error-code"></pre>
-                                </div>
-                        </div>
-                </main>
-
-                <!-- Lock / setup overlay -->
                 <div id="lock-overlay">
                         <div id="lock-card">
-                                <div id="lock-avatar">
-                                        <svg viewBox="0 0 24 24" width="64" height="64">
-                                                <path
-                                                        fill="currentColor"
-                                                        d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5Z"
-                                                />
-                                        </svg>
-                                </div>
                                 <h2 id="lock-title">Enter password</h2>
                                 <p id="lock-sub">Welcome back</p>
                                 <form id="lock-form">
@@ -83,22 +43,47 @@
                         </div>
                 </div>
 
-                <button id="home-button" title="New search" aria-label="New search">
-                        <svg viewBox="0 0 24 24" width="16" height="16">
-                                <path
-                                        fill="currentColor"
-                                        d="M12 3 2 12h3v8h6v-6h2v6h6v-8h3z"
-                                />
-                        </svg>
-                </button>
+                <div title="Scramjet Logo" class="flex-center logo-wrapper header-center">
+                        <img class="logo" src="sj.png" alt="Scramjet" />
+                        <h1>Scramjet | MW</h1>
+                </div>
+                <div class="flex-center desc left-margin">
+                        <p>
+                                Scramjet is an experimental interception based web proxy designed to
+                                evade internet censorship, bypass arbitrary web browser restrictions and
+                                innovate web proxy technologies.
+                        </p>
+                </div>
 
-                <button id="lock-button" title="Lock" aria-label="Lock">
-                        <svg viewBox="0 0 24 24" width="16" height="16">
-                                <path
-                                        fill="currentColor"
-                                        d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3Z"
-                                />
-                        </svg>
-                </button>
+                <form id="sj-form" class="flex-center">
+                        <input
+                                id="sj-search-engine"
+                                value="https://www.google.com/search?q=%s"
+                                type="hidden"
+                        />
+                        <input id="sj-address" type="text" placeholder="Search the web freely" />
+                </form>
+                <div class="desc left-margin">
+                        <p id="sj-error"></p>
+                        <pre id="sj-error-code"></pre>
+                </div>
+                <footer>
+                        <div>
+                                <a
+                                        title="The Mercury Workshop GitHub organization"
+                                        href="https://github.com/MercuryWorkshop"
+                                        >Mercury Workshop</a
+                                >
+                                <a
+                                        title="The example demo app for Scramjet"
+                                        href="https://github.com/MercuryWorkshop/Scramjet-Demo"
+                                        >GitHub</a
+                                >
+                                <a title="License information" href="credits.html">Credits</a>
+                        </div>
+                        <div>
+                                <span>Scramjet &copy; MW 2025</span>
+                        </div>
+                </footer>
         </body>
 </html>

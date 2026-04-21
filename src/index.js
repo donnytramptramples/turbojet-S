@@ -42,7 +42,9 @@ fastify.register(fastifyStatic, {
 });
 
 // ---------- Permanent password storage ----------
-const passwordFile = fileURLToPath(new URL("../.password-hash", import.meta.url));
+const passwordFile = fileURLToPath(
+        new URL("../.password-hash", import.meta.url)
+);
 
 function readStoredHash() {
         try {
@@ -59,12 +61,12 @@ fastify.get("/api/auth/status", async () => {
 });
 
 fastify.post("/api/auth/setup", async (req, reply) => {
-        const existing = readStoredHash();
-        if (existing) {
+        if (readStoredHash()) {
                 return reply.code(409).send({ ok: false, error: "Password already set." });
         }
         const body = req.body || {};
-        const hash = typeof body.hash === "string" ? body.hash.trim().toLowerCase() : "";
+        const hash =
+                typeof body.hash === "string" ? body.hash.trim().toLowerCase() : "";
         if (!/^[a-f0-9]{64}$/.test(hash)) {
                 return reply.code(400).send({ ok: false, error: "Invalid hash." });
         }
@@ -78,7 +80,8 @@ fastify.post("/api/auth/verify", async (req, reply) => {
                 return reply.code(409).send({ ok: false, error: "No password set." });
         }
         const body = req.body || {};
-        const hash = typeof body.hash === "string" ? body.hash.trim().toLowerCase() : "";
+        const hash =
+                typeof body.hash === "string" ? body.hash.trim().toLowerCase() : "";
         return { ok: hash === stored };
 });
 
